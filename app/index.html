@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KEY ART — GTA 6 Cover Maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls">
+    <h1>KEY ART</h1>
+    <p class="tagline">Turn your photos into a GTA-style key art poster: a giant chrome
+    title over the pictures, cast role tags, a quote strip, a seal and a
+    billing block — then export a print-ready PNG.</p>
+
+    <button id="make-my-cover" class="hero-btn" type="button">Make my cover</button>
+
+    <div class="group"><span class="group-title">Layout</span>
+      <div class="row" id="layout-picker">
+        <button type="button" class="layout-btn" data-layout="grid">Vice Grid</button>
+        <button type="button" class="layout-btn" data-layout="diagonal">Diagonal</button>
+        <button type="button" class="layout-btn" data-layout="hero">Hero + Strip</button>
+        <button type="button" class="layout-btn" data-layout="poster">Poster</button>
+        <button type="button" class="layout-btn active" data-layout="harbor">Harbor</button>
+        <button type="button" class="layout-btn" data-layout="heatwave">Heatwave</button>
+      </div>
+    </div>
+
+    <div class="group"><span class="group-title">Colour grade</span>
+      <div class="row" id="grade-picker">
+        <button type="button" class="grade-btn active" data-grade="sunset">Sunset</button>
+        <button type="button" class="grade-btn" data-grade="neon">Neon</button>
+        <button type="button" class="grade-btn" data-grade="noir">Noir</button>
+        <button type="button" class="grade-btn" data-grade="pastel">Pastel</button>
+        <button type="button" class="grade-btn" data-grade="gold">Gold Hour</button>
+        <button type="button" class="grade-btn" data-grade="vice">Vice Purple</button>
+        <button type="button" class="grade-btn" data-grade="teal">Teal Dusk</button>
+        <button type="button" class="grade-btn" data-grade="crimson">Crimson</button>
+      </div>
+    </div>
+
+    <div class="group"><span class="group-title">Panel</span>
+      <div class="row" id="panel-picker"></div>
+      <label class="field">Your photos <input id="photo" type="file" accept="image/*" multiple></label>
+      <div class="samples">
+        <button type="button" class="sample-btn" data-sample="driver"><img src="samples/driver.jpg" alt="Driver at golden hour"></button>
+        <button type="button" class="sample-btn" data-sample="boss"><img src="samples/boss.jpg" alt="Boss at the marina"></button>
+        <button type="button" class="sample-btn" data-sample="rider"><img src="samples/rider.jpg" alt="Rider on the beach"></button>
+        <button type="button" class="sample-btn" data-sample="courier"><img src="samples/courier.jpg" alt="Courier on a neon street"></button>
+        <button type="button" class="sample-btn" data-sample="lookout"><img src="samples/lookout.jpg" alt="Lookout on a rooftop"></button>
+        <button type="button" class="sample-btn" data-sample="wheelman"><img src="samples/wheelman.jpg" alt="Wheelman in a classic car"></button>
+        <button type="button" class="sample-btn" data-sample="boulevard"><img src="samples/boulevard.jpg" alt="Boulevard in daylight"></button>
+      </div>
+      <label class="field">Role tag <input type="text" id="role" value="THE DRIVER" maxlength="24"></label>
+      <label class="field">Flavour line (place · time · quip) <input type="text" id="flavor" value="PALM ROW · 6:40 PM · NEVER LOOKS BACK" maxlength="60"></label>
+      <label class="field">Zoom <input type="range" id="zoom" value="1" min="1" max="2.5" step="0.05"></label>
+      <p class="hint">Click a panel to select it. Drag inside a panel to pan the photo.</p>
+    </div>
+
+    <div class="group"><span class="group-title">Key art title</span>
+      <label class="field">Title <input type="text" id="title" value="GOLDEN HARBOR" maxlength="28"></label>
+      <label class="field">Size <input type="range" id="titleSize" value="1" min="0.6" max="1.6" step="0.05"></label>
+      <label class="field">Height on the poster <input type="range" id="titleY" value="0.47" min="0.25" max="0.75" step="0.01"></label>
+      <label class="field">Slant (degrees) <input type="range" id="titleSlant" value="-2" min="-6" max="6" step="0.5"></label>
+      <label class="field">Script subtitle <input type="text" id="subtitle" value="salt in the air" maxlength="40"></label>
+      <label class="check"><input id="popout" type="checkbox" checked> Pop-out hero (hero panel breaks its borders)</label>
+    </div>
+
+    <div class="group"><span class="group-title">Poster furniture</span>
+      <label class="field">Press quote <input type="text" id="quote" value="SUNSET HAS NEVER LOOKED THIS GOOD" maxlength="60"></label>
+      <label class="field">Quote source <input type="text" id="quoteSource" value="THE COASTLINE POST" maxlength="30"></label>
+      <label class="field">Stars <input type="range" id="stars" value="5" min="1" max="5" step="1"></label>
+      <label class="field">Seal text <input type="text" id="seal" value="ORIGINAL COVER ART" maxlength="24"></label>
+      <label class="field">Volume badge <input type="text" id="vol" value="VOL. 1" maxlength="12"></label>
+      <label class="field">Tagline ribbon <input type="text" id="ribbon" value="SEVEN FRIENDS · ONE LAST SUMMER · NO WAY HOME" maxlength="70"></label>
+      <label class="field">Studio (billing block) <input type="text" id="studio" value="GOLDEN HOUR FILMS" maxlength="30"></label>
+      <label class="check"><input id="comingSoon" type="checkbox" checked> COMING SOON (unchecked: NOW SHOWING)</label>
+    </div>
+
+    <div class="group"><span class="group-title">Export PNG</span>
+      <div class="exports">
+        <button id="export-square" type="button">Square 1080&times;1080</button>
+        <button id="export-portrait" type="button">Portrait 1080&times;1350</button>
+        <button id="export-wide" type="button">Wide 1920&times;1080</button>
+      </div>
+      <p id="status" role="status"></p>
+    </div>
+  </section>
+  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+</main>
+<script type="module" src="./src/editor.js"></script>
+</body>
+</html>

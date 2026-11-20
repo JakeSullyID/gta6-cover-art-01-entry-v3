@@ -1,0 +1,59 @@
+/* KEY ART — dark sunset theme.
+   Everything here is local: the two fonts below are files in ./fonts,
+   and nothing on this page fetches anything from the network. */
+:root {
+  --ink: #f4eef8;
+  --ink-dim: #c9b8d6;
+  --ink-faint: #a98fc2;
+  --panel: #1e0f2e;
+  --panel-deep: #2a1740;
+  --line: #3a2350;
+  --line-strong: #5a3a78;
+  --pink: #ff5e8a;
+  --pink-soft: #ff9ec4;
+  --gold: #ffb347;
+  --cyan: #8fe3ff;
+  --page: #14091f;
+  --canvas: #241430;
+}
+@font-face { font-family: "Anton"; src: url("./fonts/Anton-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pacifico"; src: url("./fonts/Pacifico-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+
+html, body { min-height: 100%; margin: 0; font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--page); }
+
+.app { box-sizing: border-box; display: flex; min-height: 100vh; align-items: flex-start; justify-content: center; gap: 28px; padding: 24px; }
+.controls { display: flex; width: 330px; flex: 0 0 auto; flex-direction: column; gap: 18px; }
+.controls h1 { margin: 0; font-family: "Anton", sans-serif; font-size: 44px; letter-spacing: 2px; color: var(--gold); text-shadow: 0 3px 0 var(--pink), 0 6px 18px rgb(255 94 138 / 0.45); }
+.tagline { margin: 0; color: var(--ink-dim); }
+.hint { margin: 0; font-size: 13px; color: var(--ink-faint); }
+#status { min-height: 1.2em; margin: 0; color: var(--cyan); }
+#cover { width: min(72vh, 62vw); height: min(72vh, 62vw); background: var(--canvas); box-shadow: 0 10px 40px rgb(0 0 0 / 0.55); }
+
+.hero-btn { padding: 13px; border: none; font-size: 17px; color: #160a24; background: linear-gradient(90deg, #ffb347, #ff5e8a, #c86bff); }
+
+.group { display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.group-title { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink-soft); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
+.field input[type="text"], .field select { padding: 8px; border: 1px solid var(--line-strong); border-radius: 6px; font: inherit; color: var(--ink); background: var(--panel-deep); }
+.field input[type="range"] { width: 100%; accent-color: var(--pink); }
+.check { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+
+button { padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 6px; font: inherit; font-weight: 700; color: var(--ink); background: var(--panel-deep); cursor: pointer; }
+button:hover { border-color: var(--pink); }
+button.active { border-color: var(--pink); color: var(--page); background: var(--pink); }
+
+.samples { display: flex; flex-wrap: wrap; gap: 8px; }
+.sample-btn { padding: 2px; line-height: 0; }
+.sample-btn img { display: block; width: 84px; height: 56px; border-radius: 4px; object-fit: cover; }
+.sample-btn.active { border-color: #00e5ff; box-shadow: 0 0 0 2px #00e5ff; }
+
+.exports { display: flex; flex-direction: column; gap: 8px; }
+.exports button { border-color: var(--pink); color: var(--page); background: var(--pink); }
+
+/* Screenshot mode: the cover (or the exported PNG) fills the viewport. */
+body.shot-cover .controls { display: none; }
+body.shot-cover .app { padding: 0; }
+body.shot-cover #cover { width: 100vw; height: 100vh; box-shadow: none; }
+body.shot-cover #export-shot { display: block; width: 100vw; height: 100vh; object-fit: contain; background: #160a24; }
